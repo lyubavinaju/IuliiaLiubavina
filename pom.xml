@@ -99,7 +99,6 @@
             <id>install-external-non-maven-jar-MWS-Client-into-local-maven-repo</id>
             <phase>initialize</phase>
             <configuration>
-              <repositoryLayout>default</repositoryLayout>
               <groupId>calculator</groupId>
               <artifactId>calculator</artifactId>
               <version>1.0</version>
