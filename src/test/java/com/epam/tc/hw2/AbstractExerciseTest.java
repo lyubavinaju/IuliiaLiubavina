@@ -11,7 +11,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
 public class AbstractExerciseTest {
@@ -19,19 +21,21 @@ public class AbstractExerciseTest {
     protected WebDriverWait wait;
     protected SoftAssertions softAssertions;
 
-    @BeforeMethod
-    public void setUp() {
+    @BeforeClass
+    public void beforeClass() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofMillis(1500));
+    }
+
+    @BeforeMethod
+    public void setUp() {
         softAssertions = new SoftAssertions();
     }
 
     @AfterMethod
     public void tearDown() {
-        driver = null;
-        wait = null;
         softAssertions = null;
     }
 
