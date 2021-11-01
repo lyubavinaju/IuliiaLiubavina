@@ -19,13 +19,15 @@ public class AbstractExerciseTest {
     protected WebDriver driver;
     protected WebDriverWait wait;
     protected SoftAssertions softAssertions;
+    private static final int EXPLICIT_WAIT_IN_MILLIS = 1500;
+    private static final String URL = "https://jdi-testing.github.io/jdi-light/index.html";
 
     @BeforeClass
     public void beforeClass() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        wait = new WebDriverWait(driver, Duration.ofMillis(1500));
+        wait = new WebDriverWait(driver, Duration.ofMillis(EXPLICIT_WAIT_IN_MILLIS));
     }
 
     @BeforeMethod
@@ -40,11 +42,13 @@ public class AbstractExerciseTest {
 
     protected void exercisesCommonStart(String title, Map<String, String> credentials, String username) {
         //1. Open test site by URL
-        driver.navigate().to("https://jdi-testing.github.io/jdi-light/index.html");
+        driver.navigate().to(URL);
+
         //2. Assert Browser title
         softAssertions.assertThatCode(() -> {
             wait.until(ExpectedConditions.titleIs(title));
         }).doesNotThrowAnyException();
+
         //3. Perform login
         By uuiProfileMenuLocator = By.className("uui-profile-menu");
         softAssertions.assertThatCode(() -> {
@@ -70,6 +74,7 @@ public class AbstractExerciseTest {
         softAssertions.assertThatCode(() -> {
             wait.until(ExpectedConditions.visibilityOfElementLocated(usernameLocator));
         }).doesNotThrowAnyException();
+
         //4. Assert Username is logged in
         List<WebElement> usernameList = driver.findElements(usernameLocator);
         softAssertions.assertThat(usernameList).hasSize(1);

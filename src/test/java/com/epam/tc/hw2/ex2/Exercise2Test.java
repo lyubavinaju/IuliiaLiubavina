@@ -25,6 +25,7 @@ public class Exercise2Test extends AbstractExerciseTest {
                        String radio, String dropdown) {
         //1, 2, 3, 4. open site and login
         exercisesCommonStart(title, credentials, userName);
+
         //5. Open through the header menu Service -> Different Elements Page
         By serviceLocator =
             By.xpath("//*[contains(@class, 'dropdown-toggle') and contains(normalize-space(.), 'Service')]");
@@ -37,6 +38,7 @@ public class Exercise2Test extends AbstractExerciseTest {
             driver.findElement(differentElementsLocator).click();
             wait.until(ExpectedConditions.titleIs("Different Elements"));
         }).doesNotThrowAnyException();
+
         //6. Select checkboxes
         String checkboxXPath = "//*[contains(@class, 'label-checkbox') "
             + "and (contains(normalize-space(.), '%s') or contains(normalize-space(.), '%s'))]"
@@ -50,6 +52,7 @@ public class Exercise2Test extends AbstractExerciseTest {
         softAssertions.assertThat(checkboxWebElements).hasSize(checkbox.size());
         checkboxWebElements.forEach(WebElement::click);
         checkboxWebElements.forEach(element -> softAssertions.assertThat(element.isSelected()).isTrue());
+
         //7. Select radio
         By radioValueLocator =
             By.xpath("//*[contains(@class, 'label-radio') and contains(normalize-space(.), '" + radio
@@ -61,6 +64,7 @@ public class Exercise2Test extends AbstractExerciseTest {
         List<WebElement> radioWebElements = driver.findElements(radioValueLocator);
         softAssertions.assertThat(radioWebElements).hasSize(1);
         radioWebElements.forEach(element -> softAssertions.assertThat(element.isSelected()).isTrue());
+
         //8. Select in dropdown
         By colorsLocator = By.cssSelector(".colors .uui-form-element");
         softAssertions.assertThatCode(() -> {
@@ -77,6 +81,7 @@ public class Exercise2Test extends AbstractExerciseTest {
             softAssertions.assertThat(dropdown)
                           .isEqualTo(new Select(driver.findElement(colorsLocator)).getFirstSelectedOption().getText());
         }).doesNotThrowAnyException();
+
         //9. Assert that
         // 1) for each checkbox there is an individual log row and value is corresponded to the status of checkbox
         // 2) for radio button there is a log row and value is corresponded to the status of radio button
@@ -97,8 +102,10 @@ public class Exercise2Test extends AbstractExerciseTest {
             softAssertions.assertThatCode(() -> wait.until(ExpectedConditions.visibilityOfElementLocated(logLocator)))
                           .doesNotThrowAnyException();
         }
+
         //10. Close Browser
         driver.close();
+
         softAssertions.assertAll();
     }
 }
