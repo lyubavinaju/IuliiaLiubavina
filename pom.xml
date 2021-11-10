@@ -146,9 +146,6 @@
       <properties>
         <suite.xml.name>${project.basedir}/src/test/resources/com/epam/tc/hw2/suites/AllExercisesTestSuite.XML</suite.xml.name>
       </properties>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
     </profile>
     <profile>
       <id>hw2-exercise1-test-suite</id>
@@ -160,6 +157,27 @@
       <id>hw2-exercise2-test-suite</id>
       <properties>
         <suite.xml.name>${project.basedir}/src/test/resources/com/epam/tc/hw2/suites/Ex2TestSuite.XML</suite.xml.name>
+      </properties>
+    </profile>
+    <profile>
+      <id>hw3-all-exercises-test-suite</id>
+      <properties>
+        <suite.xml.name>${project.basedir}/src/test/resources/com/epam/tc/hw3/suites/AllExercisesTestSuite.XML</suite.xml.name>
+      </properties>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+    </profile>
+    <profile>
+      <id>hw3-exercise1-test-suite</id>
+      <properties>
+        <suite.xml.name>${project.basedir}/src/test/resources/com/epam/tc/hw3/suites/Ex1TestSuite.XML</suite.xml.name>
+      </properties>
+    </profile>
+    <profile>
+      <id>hw3-exercise2-test-suite</id>
+      <properties>
+        <suite.xml.name>${project.basedir}/src/test/resources/com/epam/tc/hw3/suites/Ex2TestSuite.XML</suite.xml.name>
       </properties>
     </profile>
   </profiles>
