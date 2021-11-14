@@ -34,7 +34,7 @@ public class AbstractExerciseTest {
     @AfterMethod
     public void tearDown() {
         // Close Browser
-        driver.close();
+        driver.quit();
         softAssertions = null;
     }
 
