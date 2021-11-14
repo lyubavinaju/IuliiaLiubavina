@@ -1,4 +1,4 @@
-package com.epam.tc.hw3;
+package com.epam.tc.hw3.tests;
 
 import com.epam.tc.hw3.pages.home.HomePage;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -21,23 +21,12 @@ public class AbstractExerciseTest {
     protected SoftAssertions softAssertions;
     protected HomePage homePage;
 
-    @BeforeClass
-    public void beforeClass() {
+    @BeforeMethod
+    public void setUp() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofMillis(EXPLICIT_WAIT_IN_MILLIS));
-    }
-
-    @AfterClass
-    public void afterClass() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
-
-    @BeforeMethod
-    public void setUp() {
         softAssertions = new SoftAssertions();
         //1. Open test site by URL
         driver.navigate().to(URL);

@@ -1,8 +1,8 @@
-package com.epam.tc.hw3.ex2;
+package com.epam.tc.hw3.tests.ex2;
 
-import com.epam.tc.hw3.AbstractExerciseTest;
 import com.epam.tc.hw3.dataprovider.Exercise2Data;
 import com.epam.tc.hw3.pages.diffelements.DifferentElementsPage;
+import com.epam.tc.hw3.tests.AbstractExerciseTest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

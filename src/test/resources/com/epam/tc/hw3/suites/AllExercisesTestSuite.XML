@@ -2,8 +2,8 @@
 <suite name="All Exercises Test Suite">
   <test name="All Exercises Test">
     <packages>
-      <package name="com.epam.tc.hw3.ex1"/>
-      <package name="com.epam.tc.hw3.ex2"/>
+      <package name="com.epam.tc.hw3.tests.ex1"/>
+      <package name="com.epam.tc.hw3.tests.ex2"/>
     </packages>
   </test>
 </suite>

@@ -1,8 +1,8 @@
-package com.epam.tc.hw3.ex1;
+package com.epam.tc.hw3.tests.ex1;
 
-import com.epam.tc.hw3.AbstractExerciseTest;
 import com.epam.tc.hw3.dataprovider.Exercise1Data;
 import com.epam.tc.hw3.pages.home.FrameWithButton;
+import com.epam.tc.hw3.tests.AbstractExerciseTest;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.openqa.selenium.WebElement;

@@ -2,7 +2,7 @@
 <suite name="Exercise1 Test Suite">
   <test name="Exercise1 Test">
     <packages>
-      <package name="com.epam.tc.hw3.ex1"/>
+      <package name="com.epam.tc.hw3.tests.ex1"/>
     </packages>
   </test>
 </suite>
