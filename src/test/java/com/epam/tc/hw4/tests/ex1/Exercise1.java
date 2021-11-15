@@ -42,7 +42,7 @@ public abstract class Exercise1 extends AbstractExerciseTest {
 
     @Step("9. Switch to the iframe and check that there is “Frame Button” in the iframe")
     protected void switchToIframe(FrameWithButton frame) {
-        softAssertions.assertThatCode(() -> frame.switchToFrame().button()).doesNotThrowAnyException();
+        softAssertions.assertThat(frame.switchToFrame().button()).isPresent();
     }
 
     @Step("10. Switch to original window back")

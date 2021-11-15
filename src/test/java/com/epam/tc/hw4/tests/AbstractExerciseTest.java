@@ -55,13 +55,13 @@ public abstract class AbstractExerciseTest {
 
     @Step("3. Perform login")
     protected void performLogin(String name, String pass) {
-        softAssertions.assertThatCode(() -> homePage.openLoginMenu().login(name, pass))
-                      .doesNotThrowAnyException();
+        homePage.openLoginMenu().login(name, pass);
+        softAssertions.assertThat(homePage.username()).isPresent();
     }
 
     @Step("4. Assert {username} is logged in")
     protected void checkUsername(String username) {
-        softAssertions.assertThat(homePage.username()).isEqualTo(username);
+        softAssertions.assertThat(homePage.username().orElse(null)).isEqualTo(username);
     }
 
     @Step("Close Browser")

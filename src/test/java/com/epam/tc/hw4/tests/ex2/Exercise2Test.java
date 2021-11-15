@@ -9,10 +9,12 @@ import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
+
 
 @Features({@Feature("Home page"), @Feature("Different elements page")})
 @Story("Exercise2")
@@ -21,7 +23,7 @@ public class Exercise2Test extends AbstractExerciseTest {
     @Step("5. Open through the header menu Service -> Different Elements Page")
     private DifferentElementsPage openDifferentElementsPage(String differentElementsPageTitle) {
         DifferentElementsPage differentElementsPage =
-            homePage.header().openService().differentElementsPage();
+                homePage.header().openService().differentElementsPage();
         wait.until(ExpectedConditions.titleIs(differentElementsPageTitle));
         return differentElementsPage;
     }
@@ -30,10 +32,7 @@ public class Exercise2Test extends AbstractExerciseTest {
     private void selectCheckboxes(DifferentElementsPage page, List<String> checkboxesExpected) {
         List<WebElement> checkboxes = new ArrayList<>();
         checkboxesExpected.forEach(text -> {
-            WebElement checkbox = page.findCheckBox(text);
-            if (checkbox != null) {
-                checkboxes.add(checkbox);
-            }
+            page.findCheckBox(text).ifPresent(checkboxes::add);
         });
         softAssertions.assertThat(checkboxes).hasSize(checkboxesExpected.size());
         checkboxes.forEach(WebElement::click);
@@ -42,22 +41,17 @@ public class Exercise2Test extends AbstractExerciseTest {
 
     @Step("7. Select radio")
     private void selectRadio(DifferentElementsPage page, String radioExpected) {
-        List<WebElement> radios = new ArrayList<>();
-        WebElement radio = page.findRadio(radioExpected);
-        if (radio != null) {
-            radios.add(radio);
-        }
-        softAssertions.assertThat(radios).hasSize(1);
-        radios.forEach(WebElement::click);
-        radios.forEach(element -> softAssertions.assertThat(element.isSelected()).isTrue());
+        Optional<WebElement> radio = page.findRadio(radioExpected);
+        softAssertions.assertThat(radio).isPresent();
+        radio.ifPresent(WebElement::click);
+        radio.ifPresent(r -> softAssertions.assertThat(r.isSelected()).isTrue());
     }
 
     @Step("8. Select in dropdown")
     private void selectInDropDown(DifferentElementsPage page, String colorExpected) {
-        softAssertions.assertThatCode(() -> page.selectColor(colorExpected))
-                      .doesNotThrowAnyException();
-        softAssertions.assertThat(page.selectedColor())
-                      .isEqualTo(colorExpected);
+        page.selectColor(colorExpected);
+        softAssertions.assertThat(page.selectedColor().orElse(null))
+                .isEqualTo(colorExpected);
     }
 
     @Step("9. Assert that conditions are true")
@@ -76,7 +70,7 @@ public class Exercise2Test extends AbstractExerciseTest {
                                      List<WebElement> logs, String checkboxLogPattern) {
         checkboxesExpected.forEach(c -> {
             List<WebElement> checkboxLog = logs.stream().filter(log ->
-                log.getText().contains(String.format(checkboxLogPattern, c))).collect(Collectors.toList());
+                    log.getText().contains(String.format(checkboxLogPattern, c))).collect(Collectors.toList());
             softAssertions.assertThat(checkboxLog).hasSize(1);
         });
     }
@@ -84,14 +78,14 @@ public class Exercise2Test extends AbstractExerciseTest {
     @Step("9.2. for radio button there is a log row and value is corresponded to the status of radio button")
     private void checkRadioLogs(String radioExpected, List<WebElement> logs, String radioLogPattern) {
         List<WebElement> radioLog = logs.stream().filter(log ->
-            log.getText().contains(String.format(radioLogPattern, radioExpected))).collect(Collectors.toList());
+                log.getText().contains(String.format(radioLogPattern, radioExpected))).collect(Collectors.toList());
         softAssertions.assertThat(radioLog).hasSize(1);
     }
 
     @Step("9.3. for dropdown there is a log row and value is corresponded to the selected value")
     private void checkColorLogs(String colorExpected, List<WebElement> logs, String colorLogPattern) {
         List<WebElement> colorLog = logs.stream().filter(log ->
-            log.getText().contains(String.format(colorLogPattern, colorExpected))).collect(Collectors.toList());
+                log.getText().contains(String.format(colorLogPattern, colorExpected))).collect(Collectors.toList());
         softAssertions.assertThat(colorLog).hasSize(1);
     }
 
@@ -112,7 +106,7 @@ public class Exercise2Test extends AbstractExerciseTest {
         selectInDropDown(differentElementsPage, colorExpected);
 
         checkLogs(differentElementsPage, checkboxesExpected, checkboxLogPattern, radioLogPattern, colorLogPattern,
-            radioExpected, colorExpected);
+                radioExpected, colorExpected);
 
         softAssertions.assertAll();
     }
