@@ -1,6 +1,7 @@
 package com.epam.tc.hw3.pages.home;
 
 import com.epam.tc.hw3.pages.AbstractPage;
+import java.util.Optional;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -31,16 +32,10 @@ public class FrameWithButton extends AbstractPage {
     }
 
     public boolean isVisible() {
-        try {
-            wait.until(ExpectedConditions.visibilityOf(frame));
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+        return waitForVisibility(frame).isPresent();
     }
 
-    public WebElement button() {
-        wait.until(ExpectedConditions.visibilityOf(button));
-        return button;
+    public Optional<WebElement> button() {
+        return waitForVisibility(button);
     }
 }

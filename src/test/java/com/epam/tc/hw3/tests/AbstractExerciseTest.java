@@ -43,10 +43,10 @@ public class AbstractExerciseTest {
         softAssertions.assertThatCode(() -> wait.until(ExpectedConditions.titleIs(title))).doesNotThrowAnyException();
 
         //3. Perform login
-        softAssertions.assertThatCode(() -> homePage.openLoginMenu().login(name, pass))
-                      .doesNotThrowAnyException();
+        homePage.openLoginMenu().login(name, pass);
+        softAssertions.assertThat(homePage.username()).isPresent();
 
         //4. Assert Username is logged in
-        softAssertions.assertThat(homePage.username()).isEqualTo(username);
+        softAssertions.assertThat(homePage.username().orElse(null)).isEqualTo(username);
     }
 }

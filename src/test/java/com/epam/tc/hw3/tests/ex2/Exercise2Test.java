@@ -5,6 +5,7 @@ import com.epam.tc.hw3.pages.diffelements.DifferentElementsPage;
 import com.epam.tc.hw3.tests.AbstractExerciseTest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -23,34 +24,27 @@ public class Exercise2Test extends AbstractExerciseTest {
         //5. Open through the header menu Service -> Different Elements Page
         DifferentElementsPage differentElementsPage =
             homePage.header().openService().differentElementsPage();
-        wait.until(ExpectedConditions.titleIs(differentElementsPageTitle));
+        softAssertions.assertThatCode(() -> wait.until(ExpectedConditions.titleIs(differentElementsPageTitle)))
+                      .doesNotThrowAnyException();
 
         //6. Select checkboxes
         List<WebElement> checkboxes = new ArrayList<>();
         checkboxesExpected.forEach(text -> {
-            WebElement checkbox = differentElementsPage.findCheckBox(text);
-            if (checkbox != null) {
-                checkboxes.add(checkbox);
-            }
+            differentElementsPage.findCheckBox(text).ifPresent(checkboxes::add);
         });
         softAssertions.assertThat(checkboxes).hasSize(checkboxesExpected.size());
         checkboxes.forEach(WebElement::click);
         checkboxes.forEach(element -> softAssertions.assertThat(element.isSelected()).isTrue());
 
         //7. Select radio
-        List<WebElement> radios = new ArrayList<>();
-        WebElement radio = differentElementsPage.findRadio(radioExpected);
-        if (radio != null) {
-            radios.add(radio);
-        }
-        softAssertions.assertThat(radios).hasSize(1);
-        radios.forEach(WebElement::click);
-        radios.forEach(element -> softAssertions.assertThat(element.isSelected()).isTrue());
+        Optional<WebElement> radio = differentElementsPage.findRadio(radioExpected);
+        softAssertions.assertThat(radio).isPresent();
+        radio.ifPresent(WebElement::click);
+        radio.ifPresent(r -> softAssertions.assertThat(r.isSelected()).isTrue());
 
         //8. Select in dropdown
-        softAssertions.assertThatCode(() -> differentElementsPage.selectColor(colorExpected))
-                      .doesNotThrowAnyException();
-        softAssertions.assertThat(differentElementsPage.selectedColor())
+        differentElementsPage.selectColor(colorExpected);
+        softAssertions.assertThat(differentElementsPage.selectedColor().orElse(null))
                       .isEqualTo(colorExpected);
 
         //9. Assert that

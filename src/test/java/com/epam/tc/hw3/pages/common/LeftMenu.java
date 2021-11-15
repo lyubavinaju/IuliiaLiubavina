@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LeftMenu extends AbstractPage {
@@ -20,11 +19,6 @@ public class LeftMenu extends AbstractPage {
     }
 
     public List<WebElement> items() {
-        try {
-            wait.until(ExpectedConditions.visibilityOfAllElements(items));
-            return items;
-        } catch (Exception e) {
-            return List.of();
-        }
+        return waitForVisibility(items);
     }
 }

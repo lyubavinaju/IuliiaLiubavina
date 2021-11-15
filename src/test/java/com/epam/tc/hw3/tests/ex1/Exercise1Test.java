@@ -39,7 +39,7 @@ public class Exercise1Test extends AbstractExerciseTest {
         softAssertions.assertThat(frame.isVisible()).isTrue();
 
         //9. Switch to the iframe and check that there is “Frame Button” in the iframe
-        softAssertions.assertThatCode(() -> frame.switchToFrame().button()).doesNotThrowAnyException();
+        softAssertions.assertThat(frame.switchToFrame().button()).isPresent();
 
         //10. Switch to original window back
         softAssertions.assertThatCode(frame::switchToHomePage).doesNotThrowAnyException();

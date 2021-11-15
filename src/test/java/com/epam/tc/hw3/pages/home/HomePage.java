@@ -4,6 +4,7 @@ import com.epam.tc.hw3.pages.AbstractPage;
 import com.epam.tc.hw3.pages.common.Header;
 import com.epam.tc.hw3.pages.common.LeftMenu;
 import java.util.List;
+import java.util.Optional;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -34,7 +35,7 @@ public class HomePage extends AbstractPage {
     @FindBy(className = "icons-benefit")
     private List<WebElement> images;
 
-    @FindBy(css = ".benefit-txt")
+    @FindBy(className = "benefit-txt")
     private List<WebElement> textsUnderImages;
 
     public HomePage(WebDriver driver, WebDriverWait wait) {
@@ -58,26 +59,22 @@ public class HomePage extends AbstractPage {
     }
 
     public HomePage openLoginMenu() {
-        wait.until(ExpectedConditions.elementToBeClickable(loginMenuButton));
-        loginMenuButton.click();
+        click(loginMenuButton);
         return this;
     }
 
     private HomePage enterName(String name) {
-        wait.until(ExpectedConditions.elementToBeClickable(this.name));
-        this.name.sendKeys(name);
+        waitForClickable(this.name).ifPresent(n -> n.sendKeys(name));
         return this;
     }
 
     private HomePage enterPassword(String pass) {
-        wait.until(ExpectedConditions.elementToBeClickable(password));
-        password.sendKeys(pass);
+        waitForClickable(password).ifPresent(p -> p.sendKeys(pass));
         return this;
     }
 
     private HomePage submit() {
-        wait.until(ExpectedConditions.elementToBeClickable(submitButton));
-        submitButton.click();
+        click(submitButton);
         return this;
     }
 
@@ -85,30 +82,15 @@ public class HomePage extends AbstractPage {
         return enterName(name).enterPassword(pass).submit();
     }
 
-    public String username() {
-        try {
-            wait.until(ExpectedConditions.visibilityOf(username));
-            return username.getText();
-        } catch (Exception e) {
-            return null;
-        }
+    public Optional<String> username() {
+        return waitForVisibility(username).map(WebElement::getText);
     }
 
     public List<WebElement> images() {
-        try {
-            wait.until(ExpectedConditions.visibilityOfAllElements(images));
-            return images;
-        } catch (Exception e) {
-            return List.of();
-        }
+        return waitForVisibility(images);
     }
 
     public List<WebElement> textsUnderImages() {
-        try {
-            wait.until(ExpectedConditions.visibilityOfAllElements(textsUnderImages));
-            return textsUnderImages;
-        } catch (Exception e) {
-            return List.of();
-        }
+        return waitForVisibility(textsUnderImages);
     }
 }

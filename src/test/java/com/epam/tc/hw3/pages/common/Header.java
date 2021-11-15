@@ -26,23 +26,16 @@ public class Header extends AbstractPage {
     }
 
     public List<WebElement> items() {
-        try {
-            wait.until(ExpectedConditions.visibilityOfAllElements(items));
-            return items;
-        } catch (Exception e) {
-            return List.of();
-        }
+        return waitForVisibility(items);
     }
 
     public Header openService() {
-        wait.until(ExpectedConditions.elementToBeClickable(service));
-        service.click();
+        click(service);
         return this;
     }
 
     public DifferentElementsPage differentElementsPage() {
-        wait.until(ExpectedConditions.elementToBeClickable(differentElements));
-        differentElements.click();
+        click(differentElements);
         return new DifferentElementsPage(driver, wait);
     }
 }

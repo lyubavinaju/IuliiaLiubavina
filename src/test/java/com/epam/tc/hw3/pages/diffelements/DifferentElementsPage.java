@@ -2,12 +2,12 @@ package com.epam.tc.hw3.pages.diffelements;
 
 import com.epam.tc.hw3.pages.AbstractPage;
 import java.util.List;
+import java.util.Optional;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -33,55 +33,40 @@ public class DifferentElementsPage extends AbstractPage {
     }
 
     private List<WebElement> checkboxes() {
-        try {
-            wait.until(ExpectedConditions.visibilityOfAllElements(checkboxes));
-            return checkboxes;
-        } catch (Exception e) {
-            return List.of();
-        }
+        return waitForVisibility(checkboxes);
     }
 
     private List<WebElement> radios() {
-        try {
-            wait.until(ExpectedConditions.visibilityOfAllElements(radios));
-            return radios;
-        } catch (Exception e) {
-            return List.of();
-        }
+        return waitForVisibility(radios);
     }
 
-    public WebElement findCheckBox(String text) {
-        return checkboxes().stream().filter(c -> c.getText().contains(text))
-                           .map(c -> c.findElement(By.cssSelector("input"))).findFirst().orElse(null);
-    }
-
-    public WebElement findRadio(String text) {
-        return radios().stream().filter(c -> c.getText().contains(text))
-                       .map(c -> c.findElement(By.cssSelector("input"))).findFirst().orElse(null);
-    }
-
-    public DifferentElementsPage selectColor(String color) {
-        wait.until(ExpectedConditions.elementToBeClickable(colorsDropDownList));
-        colorsDropDownList.click();
-        colors.stream().filter(c -> c.getText().contains(color)).findFirst().ifPresent(WebElement::click);
-        return this;
-    }
-
-    public String selectedColor() {
-        try {
-            wait.until(ExpectedConditions.visibilityOf(colorsDropDownList));
-            return new Select(colorsDropDownList).getFirstSelectedOption().getText();
-        } catch (Exception e) {
-            return null;
-        }
+    private List<WebElement> colors() {
+        return waitForVisibility(colors);
     }
 
     public List<WebElement> logs() {
-        try {
-            wait.until(ExpectedConditions.visibilityOfAllElements(logs));
-            return logs;
-        } catch (Exception e) {
-            return List.of();
-        }
+        return waitForVisibility(logs);
+    }
+
+    public Optional<WebElement> findCheckBox(String text) {
+        return checkboxes().stream().filter(c -> c.getText().contains(text))
+                           .map(c -> c.findElement(By.cssSelector("input"))).findFirst();
+    }
+
+    public Optional<WebElement> findRadio(String text) {
+        return radios().stream().filter(c -> c.getText().contains(text))
+                       .map(c -> c.findElement(By.cssSelector("input"))).findFirst();
+    }
+
+    public DifferentElementsPage selectColor(String color) {
+        click(colorsDropDownList);
+        colors().stream().filter(c -> c.getText().contains(color)).findFirst()
+                .ifPresent(this::click);
+        return this;
+    }
+
+    public Optional<String> selectedColor() {
+        return waitForVisibility(colorsDropDownList).map(Select::new).map(Select::getFirstSelectedOption)
+                                                    .map(WebElement::getText);
     }
 }
