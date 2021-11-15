@@ -34,7 +34,7 @@ public class HomePage extends AbstractPage {
     @FindBy(className = "icons-benefit")
     private List<WebElement> images;
 
-    @FindBy(xpath = "//*[contains(@class, 'icons-benefit')]/../following-sibling::*[contains(@class, 'benefit-txt')]")
+    @FindBy(css = ".benefit-txt")
     private List<WebElement> textsUnderImages;
 
     public HomePage(WebDriver driver, WebDriverWait wait) {
