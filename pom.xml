@@ -179,6 +179,24 @@
       </properties>
     </profile>
     <profile>
+      <id>hw3-all-exercises-test-suite</id>
+      <properties>
+        <suite.xml.name>${project.basedir}/src/test/resources/com/epam/tc/hw3/suites/AllExercisesTestSuite.XML</suite.xml.name>
+      </properties>
+    </profile>
+    <profile>
+      <id>hw3-exercise1-test-suite</id>
+      <properties>
+        <suite.xml.name>${project.basedir}/src/test/resources/com/epam/tc/hw3/suites/Ex1TestSuite.XML</suite.xml.name>
+      </properties>
+    </profile>
+    <profile>
+      <id>hw3-exercise2-test-suite</id>
+      <properties>
+        <suite.xml.name>${project.basedir}/src/test/resources/com/epam/tc/hw3/suites/Ex2TestSuite.XML</suite.xml.name>
+      </properties>
+    </profile>
+    <profile>
       <id>hw4-all-exercises-test-suite</id>
       <properties>
         <suite.xml.name>${project.basedir}/src/test/resources/com/epam/tc/hw4/suites/AllExercisesTestSuite.XML</suite.xml.name>
