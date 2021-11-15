@@ -61,7 +61,8 @@ public abstract class AbstractExerciseTest {
 
     @Step("4. Assert {username} is logged in")
     protected void checkUsername(String username) {
-        softAssertions.assertThat(homePage.username().orElse(null)).isEqualTo(username);
+        String actualUsername = homePage.username().orElseThrow();
+        softAssertions.assertThat(actualUsername).isEqualTo(username);
     }
 
     @Step("Close Browser")
