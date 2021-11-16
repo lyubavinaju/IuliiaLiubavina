@@ -25,6 +25,8 @@
     <assertj-core.version>3.21.0</assertj-core.version>
     <testng.version>7.4.0</testng.version>
     <calculator.version>1.0</calculator.version>
+    <cucumber-java.version>7.0.0</cucumber-java.version>
+    <cucumber-testng.version>7.0.0</cucumber-testng.version>
   </properties>
 
   <dependencies>
@@ -59,6 +61,16 @@
       <groupId>io.qameta.allure</groupId>
       <artifactId>allure-testng</artifactId>
       <version>${allure.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-java</artifactId>
+      <version>${cucumber-java.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-testng</artifactId>
+      <version>${cucumber-testng.version}</version>
     </dependency>
   </dependencies>
 
@@ -200,6 +212,12 @@
       <id>hw4-all-exercises-test-suite</id>
       <properties>
         <suite.xml.name>${project.basedir}/src/test/resources/com/epam/tc/hw4/suites/AllExercisesTestSuite.XML</suite.xml.name>
+      </properties>
+    </profile>
+    <profile>
+      <id>hw5-all-exercises-test-suite</id>
+      <properties>
+        <suite.xml.name>${project.basedir}/src/test/resources/com/epam/tc/hw5/suites/AllExercisesTestSuite.XML</suite.xml.name>
       </properties>
       <activation>
         <activeByDefault>true</activeByDefault>
