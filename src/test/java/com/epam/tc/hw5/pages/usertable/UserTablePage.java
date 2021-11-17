@@ -22,7 +22,7 @@ public class UserTablePage extends BasePage {
     @FindBy(tagName = "select")
     private List<WebElement> dropdowns;
 
-    @FindBy(xpath = "//select/../following-sibling::td//a")
+    @FindBy(css = "#user-table a")
     private List<WebElement> users;
 
     @FindBy(css = ".user-descr > span")

@@ -31,10 +31,10 @@ public class Header extends BasePage {
     @FindBy(css = ".m-l8 .dropdown-toggle")
     private WebElement service;
 
-    @FindBy(css = ".m-l8 .dropdown-menu :nth-child(8) > a")
+    @FindBy(css = ".m-l8 a[href^='different-elements']")
     private WebElement differentElements;
 
-    @FindBy(css = ".m-l8 .dropdown-menu :nth-child(6) > a")
+    @FindBy(css = ".m-l8 a[href^='user-table']")
     private WebElement userTable;
 
     public Header(WebDriver driver) {

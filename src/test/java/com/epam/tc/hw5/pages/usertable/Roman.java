@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class Roman extends BasePage {
 
-    @FindBy(xpath = "//*[@id=\"roman\"]/../../..//select//option")
+    @FindBy(xpath = "//*[@id='roman']//ancestor::tr//option")
     private List<WebElement> types;
 
     public Roman(WebDriver driver) {
