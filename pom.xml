@@ -219,11 +219,18 @@
       <properties>
         <suite.xml.name>${project.basedir}/src/test/resources/com/epam/tc/hw5/suites/AllExercisesTestSuite.XML</suite.xml.name>
       </properties>
+    </profile>
+    <profile>
+      <id>hw6-all-exercises-test-suite</id>
+      <properties>
+        <suite.xml.name>${project.basedir}/src/test/resources/com/epam/tc/hw6/suites/AllExercisesTestSuite.XML</suite.xml.name>
+      </properties>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
     </profile>
   </profiles>
+
   <reporting>
     <excludeDefaults>true</excludeDefaults>
     <plugins>
