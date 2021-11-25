@@ -12,6 +12,7 @@ import com.epam.tc.hw7.entities.HeaderMenuData;
 import com.epam.tc.hw7.entities.MetalsColorsFormData;
 import com.epam.tc.hw7.entities.User;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.assertj.core.api.Assertions;
 import org.hamcrest.core.StringContains;
 import org.testng.annotations.AfterMethod;
@@ -64,7 +65,7 @@ public class MetalsAndColorsFormTest {
         metalsColorsPage.form.vegetables.is()
                                         .text(StringContains
                                             .containsString(String.join(", ", formData.vegetables)));
-        List<String> result = metalsColorsPage.result.map(UIElement::text);
+        List<String> result = metalsColorsPage.result.stream().map(UIElement::text).collect(Collectors.toList());
         Assertions.assertThat(result).isEqualTo(formData.result);
     }
 }

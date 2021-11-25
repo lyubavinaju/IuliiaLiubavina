@@ -1,7 +1,6 @@
 package com.epam.tc.hw7.pages;
 
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.JList;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
@@ -17,5 +16,5 @@ public class MetalsColorsPage extends WebPage {
 
 
     @Css(".results li")
-    public JList<UIElement> result;
+    public WebList result;
 }
