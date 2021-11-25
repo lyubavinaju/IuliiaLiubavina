@@ -1,4 +1,4 @@
-package com.epam.tc.hw7.custom;
+package com.epam.tc.hw7.composite;
 
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;

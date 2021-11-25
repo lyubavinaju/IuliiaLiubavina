@@ -1,7 +1,5 @@
 package com.epam.tc.hw7.entities;
 
-import java.util.List;
-
 public class MetalsColorsFormData {
     public String vegetablesSelectedByDefault;
     public String customRadioOdd;
@@ -10,7 +8,6 @@ public class MetalsColorsFormData {
     public String metals;
     public String[] vegetables;
     public String[] elements;
-    public List<String> result;
 
     public MetalsColorsFormData setVegetablesSelectedByDefault(String vegetablesSelectedByDefault) {
         this.vegetablesSelectedByDefault = vegetablesSelectedByDefault;
@@ -44,16 +41,6 @@ public class MetalsColorsFormData {
 
     public MetalsColorsFormData setElements(String[] elements) {
         this.elements = elements;
-        return this;
-    }
-
-    public MetalsColorsFormData setResult() {
-        this.result = List.of(
-            "Summary: " + (Integer.parseInt(this.customRadioOdd) + Integer.parseInt(customRadioEven)),
-            "Elements: " + String.join(", ", this.elements),
-            "Color: " + colors,
-            "Metal: " + metals,
-            "Vegetables: " + String.join(", ", this.vegetables));
         return this;
     }
 }

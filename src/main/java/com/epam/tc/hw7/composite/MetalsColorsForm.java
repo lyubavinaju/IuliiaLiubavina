@@ -1,4 +1,4 @@
-package com.epam.tc.hw7.custom;
+package com.epam.tc.hw7.composite;
 
 import com.epam.jdi.light.elements.complex.Checklist;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
@@ -11,6 +11,7 @@ import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
 import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
 import com.epam.tc.hw7.entities.MetalsColorsFormData;
 import java.util.Arrays;
+import org.hamcrest.core.StringContains;
 
 public class MetalsColorsForm extends Form<MetalsColorsFormData> {
 
@@ -49,5 +50,15 @@ public class MetalsColorsForm extends Form<MetalsColorsFormData> {
         elements.select(entity.elements);
         metals.select(entity.metals);
         Arrays.stream(entity.vegetables).forEach(v -> vegetables.select(v));
+    }
+
+    @Override
+    public void check(MetalsColorsFormData entity) {
+        customRadioOdd.is().selected(entity.customRadioOdd);
+        customRadioEven.is().selected(entity.customRadioEven);
+        colors.is().selected(entity.colors);
+        metals.is().selected(entity.metals);
+        elements.is().checked(entity.elements);
+        vegetables.is().text(StringContains.containsString(String.join(", ", entity.vegetables)));
     }
 }

@@ -1,6 +1,7 @@
 package com.epam.tc.hw7.dataprovider;
 
 import com.epam.tc.hw7.entities.MetalsColorsFormData;
+import com.epam.tc.hw7.entities.ResultData;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -28,7 +29,7 @@ public class TestData {
         for (String name : testDataNames) {
             jsonArray.put(jsonObject.get(name));
         }
-        Object[][] testData = new Object[jsonArray.length()][1];
+        Object[][] testData = new Object[jsonArray.length()][2];
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject formDataJson = jsonArray.getJSONObject(i);
 
@@ -51,9 +52,10 @@ public class TestData {
                 .setCustomRadioEven(String.valueOf(radio.getInt(1)))
                 .setElements(elements)
                 .setVegetables(vegetables)
-                .setVegetablesSelectedByDefault(VEGETABLES_SELECTED_BY_DEFAULT)
-                .setResult();
+                .setVegetablesSelectedByDefault(VEGETABLES_SELECTED_BY_DEFAULT);
+            ResultData resultData = new ResultData().setResult(formData);
             testData[i][0] = formData;
+            testData[i][1] = resultData;
         }
         return testData;
     }
