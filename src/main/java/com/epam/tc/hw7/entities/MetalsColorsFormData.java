@@ -1,13 +1,16 @@
 package com.epam.tc.hw7.entities;
 
+import lombok.Getter;
+
+@Getter
 public class MetalsColorsFormData {
-    public String vegetablesSelectedByDefault;
-    public String customRadioOdd;
-    public String customRadioEven;
-    public String colors;
-    public String metals;
-    public String[] vegetables;
-    public String[] elements;
+    private String vegetablesSelectedByDefault;
+    private String customRadioOdd;
+    private String customRadioEven;
+    private String colors;
+    private String metals;
+    private String[] vegetables;
+    private String[] elements;
 
     public MetalsColorsFormData setVegetablesSelectedByDefault(String vegetablesSelectedByDefault) {
         this.vegetablesSelectedByDefault = vegetablesSelectedByDefault;

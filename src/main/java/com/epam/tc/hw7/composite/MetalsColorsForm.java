@@ -44,21 +44,21 @@ public class MetalsColorsForm extends Form<MetalsColorsFormData> {
 
     @Override
     public void fill(MetalsColorsFormData entity) {
-        customRadioOdd.select(entity.customRadioOdd);
-        customRadioEven.select(entity.customRadioEven);
-        colors.select(entity.colors);
-        elements.select(entity.elements);
-        metals.select(entity.metals);
-        Arrays.stream(entity.vegetables).forEach(v -> vegetables.select(v));
+        customRadioOdd.select(entity.getCustomRadioOdd());
+        customRadioEven.select(entity.getCustomRadioEven());
+        colors.select(entity.getColors());
+        elements.select(entity.getElements());
+        metals.select(entity.getMetals());
+        Arrays.stream(entity.getVegetables()).forEach(v -> vegetables.select(v));
     }
 
     @Override
     public void check(MetalsColorsFormData entity) {
-        customRadioOdd.is().selected(entity.customRadioOdd);
-        customRadioEven.is().selected(entity.customRadioEven);
-        colors.is().selected(entity.colors);
-        metals.is().selected(entity.metals);
-        elements.is().checked(entity.elements);
-        vegetables.is().text(StringContains.containsString(String.join(", ", entity.vegetables)));
+        customRadioOdd.is().selected(entity.getCustomRadioOdd());
+        customRadioEven.is().selected(entity.getCustomRadioEven());
+        colors.is().selected(entity.getColors());
+        metals.is().selected(entity.getMetals());
+        elements.is().checked(entity.getElements());
+        vegetables.is().text(StringContains.containsString(String.join(", ", entity.getVegetables())));
     }
 }

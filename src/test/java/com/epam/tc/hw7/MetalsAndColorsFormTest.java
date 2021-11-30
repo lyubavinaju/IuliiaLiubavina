@@ -48,8 +48,8 @@ public class MetalsAndColorsFormTest {
         header.navigation.select(HeaderMenuData.METALS_COLORS);
         metalsColorsPage.checkOpened();
 
-        if (formData.vegetablesSelectedByDefault != null) {
-            metalsColorsPage.form.vegetables.select(formData.vegetablesSelectedByDefault);
+        if (formData.getVegetablesSelectedByDefault() != null) {
+            metalsColorsPage.form.vegetables.select(formData.getVegetablesSelectedByDefault());
         }
 
         metalsColorsPage.form.fill(formData);

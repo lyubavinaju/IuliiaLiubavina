@@ -7,11 +7,12 @@ public class ResultData {
 
     public ResultData setResult(MetalsColorsFormData formData) {
         this.result = List.of(
-            "Summary: " + (Integer.parseInt(formData.customRadioOdd) + Integer.parseInt(formData.customRadioEven)),
-            "Elements: " + String.join(", ", formData.elements),
-            "Color: " + formData.colors,
-            "Metal: " + formData.metals,
-            "Vegetables: " + String.join(", ", formData.vegetables));
+            "Summary: " + (Integer.parseInt(formData.getCustomRadioOdd()) + Integer
+                .parseInt(formData.getCustomRadioEven())),
+            "Elements: " + String.join(", ", formData.getElements()),
+            "Color: " + formData.getColors(),
+            "Metal: " + formData.getMetals(),
+            "Vegetables: " + String.join(", ", formData.getVegetables()));
         return this;
     }
 }
